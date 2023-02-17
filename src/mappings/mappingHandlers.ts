@@ -1,4 +1,4 @@
-import { TransferEvent, Message } from "../types";
+import { TransferEvent, Message, Delegation, UnDelegation, ReDelegation, ClaimReward } from "../types";
 import {
   CosmosEvent,
   CosmosBlock,
@@ -58,4 +58,53 @@ export async function handleEvent(event: CosmosEvent): Promise<void> {
     }
   }
   await eventRecord.save();
+}
+
+export async function handleDelegation(msg: CosmosMessage): Promise<void> {
+  const delegationRecord = Delegation.create({
+    id: `${msg.tx.hash}-${msg.idx}`,
+    blockHeight: BigInt(msg.block.block.header.height),
+    txHash: msg.tx.hash,
+    delegatorAddress: msg.msg.decodedMsg.delegatorAddress,
+    validatorAddress: msg.msg.decodedMsg.validatorAddress,
+    amount: msg.msg.decodedMsg.amount,
+  });
+  await delegationRecord.save();
+}
+
+export async function handleUndelegation(msg: CosmosMessage): Promise<void> {
+  const undelegationRecord = UnDelegation.create({
+    id: `${msg.tx.hash}-${msg.idx}`,
+    blockHeight: BigInt(msg.block.block.header.height),
+    txHash: msg.tx.hash,
+    delegatorAddress: msg.msg.decodedMsg.delegatorAddress,
+    validatorAddress: msg.msg.decodedMsg.validatorAddress,
+    amount: msg.msg.decodedMsg.amount,
+  });
+  await undelegationRecord.save();
+}
+
+export async function handleRedelegation(msg: CosmosMessage): Promise<void> {
+  const relegationRecord = ReDelegation.create({
+    id: `${msg.tx.hash}-${msg.idx}`,
+    blockHeight: BigInt(msg.block.block.header.height),
+    txHash: msg.tx.hash,
+    delegatorAddress: msg.msg.decodedMsg.delegatorAddress,
+    srcValidatorAddress: msg.msg.decodedMsg.validatorSrcAddress,
+    dstValidatorAddress: msg.msg.decodedMsg.validatorDstAddress,
+    amount: msg.msg.decodedMsg.amount,
+  });
+  await relegationRecord.save();
+}
+
+export async function handleClaimReward(msg: CosmosMessage): Promise<void> {
+  const claimRewardRecord = ClaimReward.create({
+    id: `${msg.tx.hash}-${msg.idx}`,
+    blockHeight: BigInt(msg.block.block.header.height),
+    txHash: msg.tx.hash,
+    delegatorAddress: msg.msg.decodedMsg.delegatorAddress,
+    validatorAddress: msg.msg.decodedMsg.validatorAddress,
+    amount: msg.msg.decodedMsg.amount,
+  });
+  await claimRewardRecord.save();
 }

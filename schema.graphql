@@ -30,3 +30,42 @@ type Message @entity {
   to: String!
   amount: String!
 }
+
+type Delegation @entity {
+  id: ID!
+  blockHeight: BigInt!
+  txHash: String!
+  delegatorAddress: String!
+  validatorAddress: String!
+  amount: String!
+}
+
+type UnDelegation @entity {
+  id: ID!
+  blockHeight: BigInt!
+  txHash: String!
+  delegatorAddress: String!
+  validatorAddress: String!
+  amount: String!
+}
+
+type ReDelegation @entity {
+  id: ID!
+  blockHeight: BigInt!
+  txHash: String!
+  delegatorAddress: String!
+  srcValidatorAddress: String!
+  dstValidatorAddress: String!
+  amount: String!
+}
+
+type ClaimReward @entity {
+  id: ID!
+  blockHeight: BigInt!
+  txHash: String!
+  delegatorAddress: String!
+  validatorAddress: String!
+  amount: String!
+}
+
+

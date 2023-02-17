@@ -35,9 +35,16 @@ network:
       file: ./proto/cosmos/gov/v1beta1/gov.proto
       messages:
         - WeightedVoteOption
+    alliance.alliance:
+      file: ./proto/alliance/alliance/tx.proto
+      messages:
+        - MsgDelegate
+        - MsgUndelegate
+        - MsgRedelegate
+        - MsgClaimDelegationRewards
 dataSources:
   - kind: cosmos/Runtime
-    startBlock: 1
+    startBlock: 5500
     mapping:
       file: ./dist/index.js
       handlers:
@@ -56,3 +63,19 @@ dataSources:
           kind: cosmos/MessageHandler
           filter:
             type: /cosmos.bank.v1beta1.MsgSend
+        - handler: handleDelegation
+          kind: cosmos/MessageHandler
+          filter:
+            type: /alliance.alliance.MsgDelegate
+        - handler: handleUndelegation
+          kind: cosmos/MessageHandler
+          filter:
+            type: /alliance.alliance.MsgUndelegate
+        - handler: handleRedelegation
+          kind: cosmos/MessageHandler
+          filter:
+            type: /alliance.alliance.MsgRedelegation
+        - handler: handleClaimReward
+          kind: cosmos/MessageHandler
+          filter:
+            type: /alliance.alliance.MsgClaimDelegationRewards
