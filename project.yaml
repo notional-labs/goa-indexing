@@ -44,7 +44,7 @@ network:
         - MsgClaimDelegationRewards
 dataSources:
   - kind: cosmos/Runtime
-    startBlock: 5500
+    startBlock: 50000
     mapping:
       file: ./dist/index.js
       handlers:
@@ -74,7 +74,7 @@ dataSources:
         - handler: handleRedelegation
           kind: cosmos/MessageHandler
           filter:
-            type: /alliance.alliance.MsgRedelegation
+            type: /alliance.alliance.MsgRedelegate
         - handler: handleClaimReward
           kind: cosmos/MessageHandler
           filter:

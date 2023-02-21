@@ -104,7 +104,7 @@ export async function handleClaimReward(msg: CosmosMessage): Promise<void> {
     txHash: msg.tx.hash,
     delegatorAddress: msg.msg.decodedMsg.delegatorAddress,
     validatorAddress: msg.msg.decodedMsg.validatorAddress,
-    amount: msg.msg.decodedMsg.amount,
+    amount: msg.msg.decodedMsg.amount != null ? msg.msg.decodedMsg.amount : "",
   });
   await claimRewardRecord.save();
 }

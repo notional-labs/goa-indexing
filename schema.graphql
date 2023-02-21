@@ -65,7 +65,7 @@ type ClaimReward @entity {
   txHash: String!
   delegatorAddress: String!
   validatorAddress: String!
-  amount: String!
+  amount: String
 }
 
 
