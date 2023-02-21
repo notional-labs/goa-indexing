@@ -23,10 +23,8 @@ message MsgDelegate {
 
   string                   delegator_address = 1 [(cosmos_proto.scalar) = "cosmos.AddressString"];
   string                   validator_address = 2 [(cosmos_proto.scalar) = "cosmos.AddressString"];
-  string amount = 3 [
-    (gogoproto.nullable) = false,
-    (gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Coin"
-  ];
+  repeated cosmos.base.v1beta1.Coin amount = 3
+      [(gogoproto.nullable) = false, (gogoproto.castrepeated) = "github.com/cosmos/cosmos-sdk/types.Coins"];
 }
 message MsgDelegateResponse {}
 
@@ -38,10 +36,8 @@ message MsgUndelegate {
 
   string                   delegator_address = 1 [(cosmos_proto.scalar) = "cosmos.AddressString"];
   string                   validator_address = 2 [(cosmos_proto.scalar) = "cosmos.AddressString"];
-  string amount = 3 [
-    (gogoproto.nullable) = false,
-    (gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Coin"
-  ];
+  repeated cosmos.base.v1beta1.Coin amount = 3
+      [(gogoproto.nullable) = false, (gogoproto.castrepeated) = "github.com/cosmos/cosmos-sdk/types.Coins"];
 }
 
 message MsgUndelegateResponse {}
@@ -55,10 +51,8 @@ message MsgRedelegate {
   string                   delegator_address = 1 [(cosmos_proto.scalar) = "cosmos.AddressString"];
   string                   validator_src_address = 2 [(cosmos_proto.scalar) = "cosmos.AddressString"];
   string                   validator_dst_address = 3 [(cosmos_proto.scalar) = "cosmos.AddressString"];
-  string amount = 4 [
-    (gogoproto.nullable) = false,
-    (gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Coin"
-  ];
+  repeated cosmos.base.v1beta1.Coin amount = 4
+      [(gogoproto.nullable) = false, (gogoproto.castrepeated) = "github.com/cosmos/cosmos-sdk/types.Coins"];
 }
 
 message MsgRedelegateResponse {}
